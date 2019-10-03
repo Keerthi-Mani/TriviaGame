@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+
+<html lang="en-us">
+
+<head>
+
+    <meta charset="UTF-8">
+    <title>TRIVIA GAME</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" type=text/css href="assets/css/style.css">
+
+    <!-- Bootstrap File -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+</head>
+
+<body>
+
+    <div class="jumbotron">
+        <p class="start-button text-center animated zoomInDown">
+            <a class="btn btn-warning btn-xl startButton animated pulse infinite" href="#time" role="button">Start<span
+                    class="glyphicon glyphicon-eye-open"><strong>Game!</strong></span>
+            </a>
+        </p>
+    </div>
+
+
+    <div class="container">
+        <h1 id="time">Quiz is Not Started</h1>
+
+        <div id="question_div"></div>
+
+        <div id="choices_div"></div>
+
+        <!-- <form id="quiz" name="quiz">
+            <p>1. How many moons are in our Solar System?</p>
+            <input type="radio" id="mn" name="question1" value="200"> 200 moons<br>
+            <input type="radio" id="mn" name="question1" value="181"> 181 moons<br>
+            <input type="radio" id="mn" name="question1" value="50"> 50 moons<br>
+            <input type="radio" id="mn" name="question1" value="145"> 145 moons<br>
+            <br>
+
+            <p>2. What has a gravitational pull so strong that even light cannot escape it?</p>
+            <input type="radio" id="mn" name="question2" value="Milky way"> Milky way<br>
+            <input type="radio" id="mn" name="question2" value="A black hole"> A black hole<br>
+            <input type="radio" id="mn" name="question2" value="Crater"> Crater<br>
+            <input type="radio" id="mn" name="question2" value="Constellation"> Constellation<br>
+            <br>
+
+            <p>3. What is the most common type of star found in the Milky Way?</p>
+            <input type="radio" id="mn" name="question3" value="Neutron Star"> Neutron Star<br>
+            <input type="radio" id="mn" name="question3" value="Brown Dwarf"> Brown Dwarf<br>
+            <input type="radio" id="mn" name="question3" value="Red Giant"> Red Giant<br>
+            <input type="radio" id="mn" name="question3" value="Red dwarf stars"> Red dwarf stars<br>
+            <br>
+
+            <p>4. The hottest place in the universe is located in which constellation?</p>
+            <input type="radio" id="mn" name="question4" value="The constellation Virgo"> The constellation Virgo<br>
+            <input type="radio" id="mn" name="question4" value="The constellation Cancer"> The constellation Cancer<br>
+            <input type="radio" id="mn" name="question4" value="The constellation Leo"> The constellation Leo<br>
+            <input type="radio" id="mn" name="question4" value="The constellation Aries"> The constellation Aries<br>
+            <br>
+
+            <p>5. What type of galaxy is the most common in the universe?</p>
+            <input type="radio" id="mn" name="question5" value="Irregular Galaxies"> Irregular Galaxies<br>
+            <input type="radio" id="mn" name="question5" value="Spiral Galaxies"> Spiral Galaxies<br>
+            <input type="radio" id="mn" name="question5" value="Elliptical Galaxies"> Elliptical Galaxies<br>
+            <input type="radio" id="mn" name="question5" value="Round Galaxies"> Round Galaxies<br>
+            <br>
+
+            <p>6. What is the coldest place in the universe?</p>
+            <input type="radio" id="mn" name="question6" value="A black hole"> A black hole<br>
+            <input type="radio" id="mn" name="question6" value="The Boomerang Nebula"> The Boomerang Nebula<br>
+            <input type="radio" id="mn" name="question6" value=" galaxies"> Galaxies<br>
+            <input type="radio" id="mn" name="question6" value="Constellation"> Constellation<br>
+            <br>
+
+            <p>7. What percent of the universe is dark matter?</p>
+            <input type="radio" id="mn" name="question7" value="10%"> 10%<br>
+            <input type="radio" id="mn" name="question7" value="50%"> 50%<br>
+            <input type="radio" id="mn" name="question7" value="100%"> 100%<br>
+            <input type="radio" id="mn" name="question7" value="27%"> 27%<br>
+            <br>
+
+            <p>8. What is the largest type of star in the universe?</p>
+            <input type="radio" id="mn" name="question8" value="Neutron Star"> Neutron Star<br>
+            <input type="radio" id="mn" name="question8" value="Red Dwarf"> Red Dwarf<br>
+            <input type="radio" id="mn" name="question8" value="Red SuperGiant Star"> Red SuperGiant Star<br>
+            <input type="radio" id="mn" name="question8" value="Brown Dwarf"> Brown Dwarf<br>
+            <br>
+
+            <p>9. What is the longest continuous time a human has spent in space?</p>
+            <input type="radio" id="mn" name="question9" value="500 days"> 500 days<br>
+            <input type="radio" id="mn" name="question9" value="437 days"> 437 days<br>
+            <input type="radio" id="mn" name="question9" value="100 days"> 100 days<br>
+            <input type="radio" id="mn" name="question9" value="280 days"> 280 days<br>
+            <br>
+
+            <p>10. What is the longest continuous time a human has spent in space?</p>
+            <input type="radio" id="mn" name="question10" value="60 minutes"> 60 minutes<br>
+            <input type="radio" id="mn" name="question10" value="40 minutes"> 40 minutes<br>
+            <input type="radio" id="mn" name="question10" value="15 minutes"> 15 minutes<br>
+            <input type="radio" id="mn" name="question10" value="5 minutes"> 5 minutes<br>
+            <br>
+
+        </form>-->
+
+        <div>
+            <p id="scores"></p>
+            <p id="losses"></p>
+            <p id="unanswered"></p>
+            <button class="btn btn-primary" id="reset">Reset Game</button>
+        </div>
+    </div>
+
+    <!-- JQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <script src="assets/javascript/app.js"></script>
+</body>
