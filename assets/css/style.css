@@ -1,0 +1,16 @@
+body {
+    background-image: url("http://www.seekgif.com/download/pics-photos-question-marks-background-5023");
+}
+
+.jumbotron {
+    background-image: url("../images/top.jpg");
+    height: 800px;
+}
+
+.container {
+    background-color: azure;
+}
+
+.glyphicon {
+    color: white;
+}
