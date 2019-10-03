@@ -1,51 +1,80 @@
 $(document).ready(function () {
     var userChoice, images;
     var currentQuestion = 0;
-    var score = 0;
-    var lost = 0;
+    var correctAnswers = 0;
+    var incorrectAnswer = 0;
     var unAnswered = 0;
-    var count = 5;
     var intervalId;
+    var count;
 
     //If user clicks the start button, the time start at 5 seconds for user to respond or choose an answer to each question
     $(".start-button").click(function () {
+        startTimer();
+        loadQuestion();
+    });
+
+    function startTimer() {
+        count = 30;
         intervalId = setInterval(timer, 1000);
+        $("#time").html("Time:" + count);
         function timer() {
             count--;
-
+            $("#time").html("Time:" + count);
             if (count <= 0) {
                 clearInterval(intervalId);
-                lost++;
-                nextQuestion();
+                if (currentQuestion >= spaceQuestions.length - 1) {
+                    dispalyResult();
+                    clearInterval(intervalId);
+                    return;
+                } else {
+                    unAnswered++;
+                    nextQuestion();
+                }
             }
-            $("#time").html("Time:" + count);
         }
-    });
+    }
 
     // If the count is over, then go to the next question
     function nextQuestion() {
         var isQuestionOver = (spaceQuestions.length - 1) === currentQuestion;
         if (isQuestionOver) {
-            alert("Game Is Over!!!");
+            console.log("Game Is Over!!!");
             dispalyResult();
         }
         else {
             currentQuestion++;
             loadQuestion();
         }
+        startTimer();
     }
 
     var spaceQuestions = [
         {
             question: "How many moons are in our Solar System?",
             choices: ["200 moons", "181 moons", "50 moons", "145 moons"],
-            validAnswer: "181 moons"
+            correctAnswer: "181 moons"
         },
         {
             question: "What has a gravitational pull so strong that even light cannot escape it?",
             choices: ["Milky Way", "A Black Hole", "The Constellation", "Crater"],
-            validAnswer: "A Black Hole"
+            correctAnswer: "A Black Hole"
+        },
+        {
+            question: "What percent of the universe is dark matter?",
+            choices: ["50%", "8%", "100%", "27%"],
+            correctAnswer: "27%"
+        },
+        {
+            question: "What is the longest continuous time a human has spent in space?",
+            choices: ["100 days", "389 days", "437 days", "50 days"],
+            correctAnswer: "437 days"
+        },
+        {
+            question: "What is the coldest place in the universe?",
+            choices: ["A black hole", "The Boomerang Nebula", "Galaxies", "Constellation"],
+            correctAnswer: "The Boomerang Nebula"
         }
+
     ];
     // Display the question and the choices to the browser
     function loadQuestion() {
@@ -57,45 +86,43 @@ $(document).ready(function () {
     }
 
     function loadChoices(choices) {
-        var result = "";
+        let result = '';
 
         for (var i = 0; i < choices.length; i++) {
-            result += "<p class = 'choice' data-answer = 'choices[i]'>" + choices[i] + "</p > ";
+            result += "<p class ='choice'>" + choices[i] + "</p>";
         }
         return result;
     }
 
     //Either correct/wrong choice selected, go to the next question
     $(document).on("click", ".choice", function () {
-        var selectedAnswer = $(this).attr("data-answer");
+        var selectedAnswer = $(this).attr(result);
+        console.log(selectedAnswer);
         var correctAnswer = spaceQuestions[currentQuestion].correctAnswer;
         if (correctAnswer === selectedAnswer) {
-            // User wins
-            score++;
-            nextQuestion();
-
+            correctAnswers++;
         }
         else {
-            lost++;
-            nextQuestion();
+            incorrectAnswer++;
         }
+        nextQuestion();
+        clearInterval(intervalId);
     });
 
     function dispalyResult() {
-        var result =
-            $("#scores").html("CorrectAnswers :" + "" + score);
-        $("#losses").html("IncorrectAnswers" + "" + lost);
+        $("#scores").html("Answered : " + correctAnswers + " correctly");
+        $("#losses").html("Answered : " + incorrectAnswer + " Incorrectly");
+        $("#unanswered").html("UnAnswered : " + unAnswered);
     }
 
     $(document).on("click", "#reset", function () {
-        count = 5;
+        count = 30;
         correctQuestion = 0;
-        score = 0;
-        lost = 0;
-        intervalId = null;
+        correctAnswers = 0;
+        incorrectAnswer = 0;
+        //intervalId = null;
         loadQuestion();
     });
-    loadQuestion();
 });
 
 
