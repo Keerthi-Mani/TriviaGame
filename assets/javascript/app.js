@@ -1,52 +1,8 @@
 $(document).ready(function () {
-    var userChoice, images;
-    var currentQuestion = 0;
-    var correctAnswers = 0;
-    var incorrectAnswer = 0;
-    var unAnswered = 0;
+    var currentQuestion;
+    var correctAnswers;
+    var incorrectAnswer;
     var intervalId;
-    var count;
-
-    //If user clicks the start button, the time start at 5 seconds for user to respond or choose an answer to each question
-    $(".start-button").click(function () {
-        startTimer();
-        loadQuestion();
-    });
-
-    function startTimer() {
-        count = 30;
-        intervalId = setInterval(timer, 1000);
-        $("#time").html("Time:" + count);
-        function timer() {
-            count--;
-            $("#time").html("Time:" + count);
-            if (count <= 0) {
-                clearInterval(intervalId);
-                if (currentQuestion >= spaceQuestions.length - 1) {
-                    dispalyResult();
-                    clearInterval(intervalId);
-                    return;
-                } else {
-                    unAnswered++;
-                    nextQuestion();
-                }
-            }
-        }
-    }
-
-    // If the count is over, then go to the next question
-    function nextQuestion() {
-        var isQuestionOver = (spaceQuestions.length - 1) === currentQuestion;
-        if (isQuestionOver) {
-            console.log("Game Is Over!!!");
-            dispalyResult();
-        }
-        else {
-            currentQuestion++;
-            loadQuestion();
-        }
-        startTimer();
-    }
 
     var spaceQuestions = [
         {
@@ -76,64 +32,97 @@ $(document).ready(function () {
         }
 
     ];
+
+    function init() {
+        currentQuestion = -1;
+        correctAnswers = 0;
+        incorrectAnswer = 0;
+        $("#choices_div").empty();
+        $("#scores").empty();
+        $("#losses").empty();
+        $("#unanswered").empty();
+        $("#time").html("Time remaining to answer: ");
+        clearInterval(intervalId);
+    }
+
+    //If user clicks the start button, the time start at 5 seconds for user to respond or choose an answer to each question
+    $(".start-button").click(function () {
+        init();
+        nextQuestion();
+    });
+
+    var count;
+    function startTimer() {
+        count = 9;
+        intervalId = setInterval(timer, 1000);
+    }
+
+    function timer() {
+        $("#time").html("Time remaining to answer: " + count);
+        if (count-- <= 0) {
+            clearInterval(intervalId);
+            nextQuestion();
+        }
+    }
+
+    // If the count is over, then go to the next question
+    function nextQuestion() {
+        currentQuestion++;
+        if ((spaceQuestions.length) === currentQuestion) {
+            dispalyResult();
+        }
+        else {
+            loadQuestion();
+        }
+    }
+
     // Display the question and the choices to the browser
     function loadQuestion() {
         var question = spaceQuestions[currentQuestion].question;
         var choices = spaceQuestions[currentQuestion].choices;
-
+        startTimer();
         $("#question_div").html(question);
-        $("#choices_div").html(loadChoices(choices));
+        loadChoices(choices);
     }
 
     function loadChoices(choices) {
-        let result = '';
-
+        var result = '';
+        $("#choices_div").empty();
         for (var i = 0; i < choices.length; i++) {
-            result += "<p class ='choice'>" + choices[i] + "</p>";
+            var result = $("<div>");
+            result.addClass("choice");
+            result.html(choices[i]);
+            result.attr("guess", i);
+            $("#choices_div").append(result);
         }
-        return result;
+
+        //Either correct/wrong choice selected, go to the next question
+        $(".choice").click(function () {
+            var selectedAnswer = choices[$(this).attr("guess")];
+            var answer = spaceQuestions[currentQuestion].correctAnswer;
+            if (answer === selectedAnswer) {
+                correctAnswers++;
+            }
+            else {
+                incorrectAnswer++;
+            }
+            clearInterval(intervalId);
+            nextQuestion();
+        });
     }
 
-    //Either correct/wrong choice selected, go to the next question
-    $(document).on("click", ".choice", function () {
-        var selectedAnswer = $(this).attr(result);
-        console.log(selectedAnswer);
-        var correctAnswer = spaceQuestions[currentQuestion].correctAnswer;
-        if (correctAnswer === selectedAnswer) {
-            correctAnswers++;
-        }
-        else {
-            incorrectAnswer++;
-        }
-        nextQuestion();
-        clearInterval(intervalId);
-    });
-
     function dispalyResult() {
-        $("#scores").html("Answered : " + correctAnswers + " correctly");
-        $("#losses").html("Answered : " + incorrectAnswer + " Incorrectly");
-        $("#unanswered").html("UnAnswered : " + unAnswered);
+        $("#time").empty();
+        $("#question_div").empty();
+        $("#choices_div").empty();
+        $("#scores").html("Answered Correctly: " + correctAnswers);
+        $("#losses").html("Answered Incorrectly: " + incorrectAnswer);
+        var unans = spaceQuestions.length - (correctAnswers + incorrectAnswer);
+        $("#unanswered").html("UnAnswered Questions: " + unans);
     }
 
     $(document).on("click", "#reset", function () {
-        count = 30;
-        correctQuestion = 0;
-        correctAnswers = 0;
-        incorrectAnswer = 0;
-        //intervalId = null;
-        loadQuestion();
+        init();
+        nextQuestion();
     });
 });
-
-
-
-
-
-
-
-    //$(this).hide();
-
-
-
-
-
