@@ -1,16 +1,57 @@
 body {
     background-image: url("http://www.seekgif.com/download/pics-photos-question-marks-background-5023");
+font-family: 'Times New Roman', Times, serif;
 }
 
 .jumbotron {
     background-image: url("../images/top.jpg");
     height:800px;
+    width:100%;
 }
 
 .container {
-    background-color: azure;
+     background-color:azure;
+     opacity: 0.9;
+     font-family: 'Times New Roman', Times, serif;
 }
 
 .glyphicon {
     color: white;
+}
+
+.btn {    
+    margin: 20px;
+    font-weight: bold;
+}
+
+.btn-primary {
+margin-left: 45%;
+font-weight: bold;
+}
+
+#question_div, #choices_div, #time {
+    text-align: center;
+    padding: 10px;
+    
+}
+
+#choices_div, #question_div {
+font-size: 25px;
+font-weight: bold;
+}
+
+.choice:hover{
+    opacity: 0.8;
+    text-shadow: 2px 2px 8px orangered;
+    cursor: pointer;
+}
+#time {
+    color: red;
+    text-shadow: 2px 2px 8px orange;
+}
+
+.final_result {
+    color: magenta;
+    text-shadow: 5px 5px 10px orangered;
+    text-align: center;
 }

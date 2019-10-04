@@ -115,10 +115,10 @@ $(document).ready(function () {
         $("#time").empty();
         $("#question_div").empty();
         $("#choices_div").empty();
-        $("#scores").html("Answered Correctly: " + correctAnswers);
-        $("#losses").html("Answered Incorrectly: " + incorrectAnswer);
+        $("#scores").append("<h1 class = final_result>" + "Answered Correctly: " + correctAnswers + "</h1>");
+        $("#losses").append("<h1 class = final_result>" + "Answered Incorrectly: " + incorrectAnswer + "</h1>");
         var unans = spaceQuestions.length - (correctAnswers + incorrectAnswer);
-        $("#unanswered").html("UnAnswered Questions: " + unans);
+        $("#unanswered").append("<h1 class = final_result>" + "UnAnswered Questions: " + unans + "</h1>");
     }
 
     $(document).on("click", "#reset", function () {
