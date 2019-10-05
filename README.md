@@ -14,13 +14,13 @@ HTML, CSS (including Bootstrap), JavaScript (and libraries jQuery)
 
 ![image](https://user-images.githubusercontent.com/52920074/66248383-22b1d800-e6f4-11e9-991b-1bed61e84f25.png)
 
-### Option Two: Advanced Assignment (Timed Questions)
+### Timed Questions
 
-1. You'll create a trivia game and the game pops upm the question onlky when the player clicks the start game button. 
+1. You'll create a trivia game and the game pops up the question only when the player clicks the "Start Game" button. 
 
 2. It shows only one question until the player answers it or their time runs out.
 
-3. If  the player selects the correct answer or incorrect answer,  displays the next question -- do this without user input.
+3. If the player selects the correct answer or incorrect answer or umsanwered,  displays the next question.
 
 4. The scenario is similar for  time-outs.
 
